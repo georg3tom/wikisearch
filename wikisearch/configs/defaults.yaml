@@ -1,0 +1,4 @@
+config_version: 1.0
+
+data:
+  filename: './data/enwiki-latest-pages-articles17.xml'

@@ -127,3 +127,7 @@ dmypy.json
 
 # Pyre type checker
 .pyre/
+
+/data
+/inverted_indexes
+/invertedindex_stat.txt

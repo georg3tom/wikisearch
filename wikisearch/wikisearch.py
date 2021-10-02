@@ -1,6 +1,7 @@
 import argparse
 from .index import Index
 from .utils.logger import logger
+from pathlib import Path
 
 
 def create_index(conf):
@@ -10,9 +11,9 @@ def create_index(conf):
 
 
 def search_index(conf):
+    logger.info("Starting search")
     index = Index(conf)
-    ret = index.search()
-    print(ret)
+    index.search()
 
 
 def main():
@@ -21,10 +22,17 @@ def main():
     parser.add_argument(
         "--file", type=str, default="./data/enwiki-latest-pages-articles17.xml"
     )
-    parser.add_argument("--stats", type=str, default="./invertedindex_stat.txt")
+    parser.add_argument("--stats", type=str, default="./stats.txt")
     parser.add_argument("--save", type=str, default="./inverted_index/")
-    parser.add_argument("--query", type=str)
+    parser.add_argument("--query", type=str, default="./queries.txt")
+    parser.add_argument("--result", type=str, default="./queries_op.txt")
+    parser.add_argument("--max_tokens", type=int, default=10000)
+    parser.add_argument("--max_titles", type=int, default=10000)
+    parser.add_argument("--max_output", type=int, default=10)
     conf = parser.parse_args()
+    conf.meta_path = Path(conf.save + "/meta.json")
+    conf.token_count = Path(conf.save + "/token_count")
+    conf.doc_num = Path(conf.save + "/doc_num.txt")
 
     if conf.run == "index":
         create_index(conf)

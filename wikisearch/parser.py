@@ -15,8 +15,6 @@ class WikiParser:
         self._parser.setContentHandler(handler)
         logger.info("Parsing wiki dump file: {}".format(conf.file))
         self._parser.parse(conf.file)
-        with open(conf.stats, "w") as f:
-            f.write(str(handler.get_stats()) + "\n")
 
 
 class WikiHandler(sax.handler.ContentHandler):
@@ -26,12 +24,8 @@ class WikiHandler(sax.handler.ContentHandler):
         self._id = None
         self._item_tag = "page"
         self._indexer = None
-        self._tag = None
         self._notvalid = True
         self._pre = Preprocess()
-
-    def get_stats(self):
-        return len(self._pre.beforeclean)
 
     def indexCallback(self, func):
         self._indexer = func
@@ -63,6 +57,3 @@ class WikiHandler(sax.handler.ContentHandler):
             self._title.append(content)
         elif self._tag == "text":
             self._data.append(content)
-        elif self._tag == "id":
-            if self._id == None:
-                self._id = int(content)

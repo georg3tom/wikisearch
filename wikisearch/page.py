@@ -10,6 +10,7 @@ class Page:
     links: list = field(default_factory=list)
     references: list = field(default_factory=list)
     id: int = 0
+    title_orginal: str = ""
 
     def apply(
         self,

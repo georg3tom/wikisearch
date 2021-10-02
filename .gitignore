@@ -129,5 +129,6 @@ dmypy.json
 .pyre/
 
 /data
-/inverted_indexes
+/inverted_index*
+/index*
 /invertedindex_stat.txt

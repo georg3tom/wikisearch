@@ -60,4 +60,4 @@ class ColorfulFormatter(logging.Formatter):
         return prefix + " " + log
 
 
-logger = setup_loggger(color=False)
+logger = setup_loggger(color=True)
